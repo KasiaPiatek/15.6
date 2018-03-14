@@ -1,49 +1,41 @@
-class Stopwatch {
-
-
-	constructor(display) {
+class stopWatch {
+    constructor(display) {
 		this.running = false;
 		this.display = display;
 		this.reset();
 		this.print(this.times);
 	}
 
-	function pad0(value) {
-    let result = value.toString();
-    if (result.length < 2) {
-        result = '0' + result;
+    reset() {
+       this.times = {
+            minutes: 0,
+            seconds: 0,
+            miliseconds: 0,
+        };
+
     }
-    return result;
-	}	
+    print() {
+        this.display.innerText = this.format(this.times);
+    }
 
 	format(times) {
         return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
 	}
 
-	print() {
-		thisdisplayinnerText = this.format(this.times);
-	}
 
-	start() {
+    start() {
     if (!this.running) {
         this.running = true;
         this.watch = setInterval(() => this.step(), 10);
-    }
+        }
 
-}
+    }
     stop() {
     if (!this.running) return;
     this.calculate();
     this.print();
 	}
 
-		reset() {
-		this.times = {
-			minutes: 0,
-			seconds: 0,
-			miliseconds: 0,
-		};
-	}
 
 	calculate() {
     this.times.miliseconds += 1;
@@ -54,19 +46,27 @@ class Stopwatch {
     if (this.times.seconds >= 60) {
         this.times.minutes += 1;
         this.times.seconds = 0;
+        }
     }
-
+    
     stop() {
     this.running = false;
     clearInterval(this.watch);
+    } 
+
+
+
+
+    function pad0(value) {
+    let result = value.toString();
+    if (result.length < 2) {
+        result = '0' + result;
+        }
+    }
 }
-}
 
 
-
-}
-
-const stopwatch = new StopWatch(
+const stopwatch = new stopWatch(
 document.querySelector('.StopWatch'));
 
 
