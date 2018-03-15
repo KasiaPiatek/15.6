@@ -3,7 +3,6 @@ class stopWatch {
 		this.running = false;
 		this.display = display;
 		this.reset();
-		this.print(this.times);
 	}
 
     reset() {
@@ -12,8 +11,10 @@ class stopWatch {
             seconds: 0,
             miliseconds: 0,
         };
-
+        this.print();
     }
+
+
     print() {
         this.display.innerText = this.format(this.times);
     }
@@ -30,7 +31,8 @@ class stopWatch {
         }
 
     }
-    stop() {
+
+    step() {
     if (!this.running) return;
     this.calculate();
     this.print();
@@ -48,23 +50,21 @@ class stopWatch {
         this.times.seconds = 0;
         }
     }
-    
+
     stop() {
     this.running = false;
     clearInterval(this.watch);
     } 
-
-
-
+      
+}
 
     function pad0(value) {
     let result = value.toString();
     if (result.length < 2) {
         result = '0' + result;
         }
+        return result;
     }
-}
-
 
 const stopwatch = new stopWatch(
 document.querySelector('.StopWatch'));
@@ -77,7 +77,7 @@ let stopButton = document.getElementById('stop');
 stopButton.addEventListener('click', () => stopwatch.stop());
 
 let resetButton = document.getElementById('reset');
-stopButton.addEventListener('click', () => stopwatch.reset());
+resetButton.addEventListener('click', () => stopwatch.reset());
 
 
 
